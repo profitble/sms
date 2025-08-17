@@ -189,7 +189,7 @@ export default function ContactsPage() {
         </Card>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
         <Card>
           <CardHeader className="pb-6">
             <CardTitle className="text-lg">Import CSV</CardTitle>
@@ -299,10 +299,10 @@ export default function ContactsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-full">
                 <thead className="bg-gray-50 dark:bg-gray-800/50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-12">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-12">
                       <input
                         type="checkbox"
                         checked={allVisibleSelected}
@@ -314,16 +314,16 @@ export default function ContactsPage() {
                         aria-label="Select all contacts"
                       />
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[140px]">
                       Phone
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hidden sm:table-cell">
                       Keyword
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hidden md:table-cell">
                       Country
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hidden lg:table-cell">
                       Received At
                     </th>
                   </tr>
@@ -334,7 +334,7 @@ export default function ContactsPage() {
                       key={contact.id}
                       className="hover:bg-gray-50 dark:hover:bg-gray-800/50"
                     >
-                      <td className="px-6 py-4">
+                      <td className="px-3 sm:px-6 py-4">
                         <input
                           type="checkbox"
                           checked={selected.has(contact.phone_e164)}
@@ -343,20 +343,27 @@ export default function ContactsPage() {
                           aria-label={`Select contact ${contact.phone_e164}`}
                         />
                       </td>
-                      <td className="px-6 py-4 text-sm font-mono text-gray-900 dark:text-white">
-                        {formatPhoneNumber(contact.phone_e164)}
+                      <td className="px-3 sm:px-6 py-4">
+                        <div className="text-sm font-mono text-gray-900 dark:text-white">
+                          {formatPhoneNumber(contact.phone_e164)}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden mt-1">
+                          {contact.keyword && <span className="mr-2">#{contact.keyword}</span>}
+                          {contact.country_iso2 && <span className="mr-2">{contact.country_iso2}</span>}
+                          <span>{new Date(contact.received_at).toLocaleDateString()}</span>
+                        </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                      <td className="px-3 sm:px-6 py-4 text-sm text-gray-900 dark:text-white hidden sm:table-cell">
                         {contact.keyword ? (
                           <Badge variant="outline">{contact.keyword}</Badge>
                         ) : (
-                          <span className="text-gray-400">-</span>
+                          <span className="text-gray-400 dark:text-gray-500">-</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
-                        {contact.country_iso2 || <span className="text-gray-400">-</span>}
+                      <td className="px-3 sm:px-6 py-4 text-sm text-gray-900 dark:text-white hidden md:table-cell">
+                        {contact.country_iso2 || <span className="text-gray-400 dark:text-gray-500">-</span>}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                      <td className="px-3 sm:px-6 py-4 text-sm text-gray-500 dark:text-gray-400 hidden lg:table-cell">
                         {new Date(contact.received_at).toLocaleDateString()}
                       </td>
                     </tr>
