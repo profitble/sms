@@ -10,13 +10,6 @@ export default function SettingsPage() {
     window.location.href = '/admin'
   }
 
-  const openAssistantConsole = () => {
-    window.open('/assistant', '_blank')
-  }
-
-  const openMaxConsole = () => {
-    window.open('/max', '_blank')
-  }
 
   // Get masked environment variables for display
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || 'Not configured'
@@ -39,7 +32,7 @@ export default function SettingsPage() {
             Settings
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            System configuration and console access
+            System configuration and management
           </p>
         </div>
       </div>
@@ -79,36 +72,20 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
 
-        {/* Console Access */}
+        {/* Admin Actions */}
         <Card>
           <CardHeader className="pb-6">
-            <CardTitle className="text-lg">Console Access</CardTitle>
-            <CardDescription className="mt-2">Access administrative consoles and tools</CardDescription>
+            <CardTitle className="text-lg">Admin Actions</CardTitle>
+            <CardDescription className="mt-2">Administrative functions and logout</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <Button
-              variant="neumorphic-primary"
-              onClick={openAssistantConsole}
-              className="w-full"
-            >
-              Open Assistant Console
-            </Button>
-            <Button
               variant="neumorphic-secondary"
-              onClick={openMaxConsole}
-              className="w-full"
+              onClick={handleLogout}
+              className="w-full text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
             >
-              Open Max Console
+              Logout
             </Button>
-            <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-              <Button
-                variant="neumorphic-secondary"
-                onClick={handleLogout}
-                className="w-full text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
-              >
-                Logout
-              </Button>
-            </div>
           </CardContent>
         </Card>
       </div>
@@ -120,8 +97,8 @@ export default function SettingsPage() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-blue-700 dark:text-blue-300 leading-relaxed">
-            This admin interface manages campaigns and contacts for the WhatsApp notification system. 
-            Campaigns are manually delivered by assistants via the Assistant Console.
+            This admin interface manages campaigns and contacts for the SMS notification system. 
+            Use the Campaigns section to create and manage messaging campaigns, and the Contacts section to view and manage your subscriber list.
           </p>
         </CardContent>
       </Card>

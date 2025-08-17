@@ -1,0 +1,24 @@
+# Node modules
+node_modules/
+
+# Build outputs
+.next/
+out/
+build/
+
+# Dependencies
+.pnp
+.pnp.*
+
+# Environment files
+.env*
+
+# Debug logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# TypeScript build info
+*.tsbuildinfo
