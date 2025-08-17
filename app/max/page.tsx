@@ -261,8 +261,8 @@ export default function MaxPage() {
             <div className="flex-shrink-0 w-12 h-12 bg-sky-600 rounded-lg flex items-center justify-center mx-auto mb-4">
               <span className="text-white text-xl font-bold">M</span>
             </div>
-            <CardTitle className="text-2xl">Max Console Login</CardTitle>
-            <CardDescription>Enter password to access the Max console</CardDescription>
+            <CardTitle className="text-2xl">Max Login</CardTitle>
+            <CardDescription>Enter password to access the Max console.</CardDescription>
           </CardHeader>
           <CardContent>
             <form action={handleLogin} className="space-y-4">

@@ -48,9 +48,6 @@ export default function Home() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 px-4">
       <Card className="max-w-md w-full">
         <CardHeader className="text-center pb-6">
-          <div className="flex-shrink-0 w-12 h-12 bg-sky-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <span className="text-white text-xl font-bold">W</span>
-          </div>
           <CardTitle className="text-2xl">Join the Waitlist</CardTitle>
           <CardDescription>Message us on WhatsApp with the keyword below</CardDescription>
         </CardHeader>

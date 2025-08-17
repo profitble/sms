@@ -257,7 +257,7 @@ export default function AssistantPage() {
               <span className="text-white text-xl font-bold">A</span>
             </div>
             <CardTitle className="text-2xl">Assistant Login</CardTitle>
-            <CardDescription>Enter password to access the assistant console</CardDescription>
+            <CardDescription>Enter password to access the assistant console.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">

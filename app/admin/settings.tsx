@@ -12,41 +12,45 @@ export default function SettingsPage() {
 
 
   // Get masked environment variables for display
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || 'Not configured'
-  const whatsappKeyword = process.env.NEXT_PUBLIC_WHATSAPP_KEYWORD || 'Not configured'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WA_NUMBER_E164 || 'Not configured'
+  const whatsappKeyword = process.env.NEXT_PUBLIC_WA_KEYWORD || 'Not configured'
 
-  const maskString = (str: string) => {
-    if (str === 'Not configured' || str.length <= 4) return str
-    return str.substring(0, 2) + '*'.repeat(str.length - 4) + str.substring(str.length - 2)
+  const formatPhoneNumber = (phoneNumber: string) => {
+    if (phoneNumber === 'Not configured') return phoneNumber
+    
+    // Remove any non-digit characters except the leading +
+    const cleaned = phoneNumber.replace(/[^\d+]/g, '')
+    
+    // Check if it starts with + and has enough digits
+    if (cleaned.startsWith('+') && cleaned.length >= 11) {
+      const countryCode = cleaned.substring(1, cleaned.length - 10) // Everything except last 10 digits
+      const areaCode = cleaned.substring(cleaned.length - 10, cleaned.length - 7) // Next 3 digits
+      const firstPart = cleaned.substring(cleaned.length - 7, cleaned.length - 4) // Next 3 digits
+      const secondPart = cleaned.substring(cleaned.length - 4) // Last 4 digits
+      
+      return `+${countryCode} (${areaCode}) ${firstPart} - ${secondPart}`
+    }
+    
+    return phoneNumber // Return as-is if format is unexpected
   }
 
   return (
     <div className="space-y-10">
       {/* Header */}
-      <div className="flex items-center space-x-4 mb-8">
-        <div className="flex-shrink-0 w-12 h-12 bg-sky-600 rounded-lg flex items-center justify-center">
-          <span className="text-white text-xl">⚙️</span>
-        </div>
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Settings
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            System configuration and management
-          </p>
-        </div>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          Settings
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          System configuration and management
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Environment Info */}
         <Card>
           <CardHeader className="pb-6">
-            <div className="flex items-center space-x-3 mb-2">
-              <div className="flex-shrink-0 w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
-                <span className="text-white text-sm">🌐</span>
-              </div>
-              <CardTitle className="text-lg">Environment Info</CardTitle>
-            </div>
+            <CardTitle className="text-lg">Environment Info</CardTitle>
             <CardDescription>Current system configuration</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
@@ -55,18 +59,15 @@ export default function SettingsPage() {
                 WhatsApp Number
               </label>
               <div className="text-sm font-mono bg-gray-50 dark:bg-gray-800 px-4 py-3 rounded-lg border">
-                {maskString(whatsappNumber)}
+                {formatPhoneNumber(whatsappNumber)}
               </div>
             </div>
             <div className="space-y-3">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 WhatsApp Keyword
               </label>
-              <div className="flex items-center gap-3">
-                <div className="text-sm font-mono bg-gray-50 dark:bg-gray-800 px-4 py-3 rounded-lg border flex-1">
-                  {maskString(whatsappKeyword)}
-                </div>
-                <Badge variant="secondary">Active</Badge>
+              <div className="text-sm font-mono bg-gray-50 dark:bg-gray-800 px-4 py-3 rounded-lg border">
+                {whatsappKeyword}
               </div>
             </div>
           </CardContent>
@@ -89,19 +90,6 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
       </div>
-
-      {/* System Info */}
-      <Card className="border-blue-200 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800">
-        <CardHeader className="pb-6">
-          <CardTitle className="text-lg text-blue-800 dark:text-blue-200">About This System</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-blue-700 dark:text-blue-300 leading-relaxed">
-            This admin interface manages campaigns and contacts for the SMS notification system. 
-            Use the Campaigns section to create and manage messaging campaigns, and the Contacts section to view and manage your subscriber list.
-          </p>
-        </CardContent>
-      </Card>
     </div>
   )
 }

@@ -72,6 +72,23 @@ export default function ContactsPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [toast, setToast] = useState<ToastState>({ show: false, message: '', type: 'success' })
 
+  const formatPhoneNumber = (phoneNumber: string) => {
+    // Remove any non-digit characters except the leading +
+    const cleaned = phoneNumber.replace(/[^\d+]/g, '')
+    
+    // Check if it starts with + and has enough digits
+    if (cleaned.startsWith('+') && cleaned.length >= 11) {
+      const countryCode = cleaned.substring(1, cleaned.length - 10) // Everything except last 10 digits
+      const areaCode = cleaned.substring(cleaned.length - 10, cleaned.length - 7) // Next 3 digits
+      const firstPart = cleaned.substring(cleaned.length - 7, cleaned.length - 4) // Next 3 digits
+      const secondPart = cleaned.substring(cleaned.length - 4) // Last 4 digits
+      
+      return `+${countryCode} (${areaCode}) ${firstPart} - ${secondPart}`
+    }
+    
+    return phoneNumber // Return as-is if format is unexpected
+  }
+
   const loadContacts = useCallback(async () => {
     try {
       const data = await fetchContacts(filters)
@@ -327,7 +344,7 @@ export default function ContactsPage() {
                         />
                       </td>
                       <td className="px-6 py-4 text-sm font-mono text-gray-900 dark:text-white">
-                        {contact.phone_e164}
+                        {formatPhoneNumber(contact.phone_e164)}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
                         {contact.keyword ? (
