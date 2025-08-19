@@ -17,7 +17,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "neumorphic-primary", ...props }, ref) => {
-    const baseClasses = "inline-flex items-center justify-center rounded-xl h-12 sm:h-14 px-5 sm:px-6 font-medium transition-all duration-200 select-none active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+    const baseClasses = "inline-flex items-center justify-center rounded-xl h-14 sm:h-12 px-6 sm:px-5 text-base sm:text-sm font-medium transition-all duration-200 select-none active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     
     const variants = {
       "neumorphic-primary": "bg-sky-600 text-white shadow-[0_6px_0_0_rgb(3,105,161)] hover:translate-y-[2px] hover:shadow-[0_4px_0_0_rgb(3,105,161)] active:translate-y-[4px] active:shadow-[0_2px_0_0_rgb(3,105,161)] dark:bg-sky-500 dark:shadow-[0_6px_0_0_rgb(2,90,140)] dark:hover:shadow-[0_4px_0_0_rgb(2,90,140)] dark:active:shadow-[0_2px_0_0_rgb(2,90,140)]",

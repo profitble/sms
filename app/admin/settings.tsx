@@ -11,7 +11,7 @@ export default function SettingsPage() {
 
 
   // Get masked environment variables for display
-  const whatsappNumber = process.env.NEXT_PUBLIC_WA_NUMBER_E164 || 'Not configured'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WA_NUMBER_E164 || '+19095290130'
   const whatsappKeyword = process.env.NEXT_PUBLIC_WA_KEYWORD || 'Not configured'
 
   const formatPhoneNumber = (phoneNumber: string) => {

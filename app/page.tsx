@@ -10,9 +10,9 @@ export default function Home() {
   const [copied, setCopied] = useState(false)
   const [qrCodeUrl, setQrCodeUrl] = useState<string>('')
   
-  const waNumber = process.env.NEXT_PUBLIC_WA_NUMBER_E164
+  const waNumber = process.env.NEXT_PUBLIC_WA_NUMBER_E164 ?? '+19095290130'
   const waKeyword = process.env.NEXT_PUBLIC_WA_KEYWORD ?? 'JOIN'
-  const whatsappUrl = waNumber ? `https://wa.me/${waNumber.replace('+', '')}?text=${encodeURIComponent(waKeyword)}` : ''
+  const whatsappUrl = waNumber ? `https://wa.me/${waNumber.replace(/\D/g, '')}?text=${encodeURIComponent(waKeyword)}` : ''
 
   // Generate QR code on mount
   useEffect(() => {
@@ -53,10 +53,6 @@ export default function Home() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="text-center">
-            <div className="text-2xl font-bold text-sky-600 dark:text-sky-400 mb-4">
-              {waKeyword}
-            </div>
-            
             {qrCodeUrl && (
               <div className="flex justify-center mb-6">
                 <Image

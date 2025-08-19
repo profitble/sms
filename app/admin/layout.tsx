@@ -3,12 +3,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '../../components/ui/button'
-import ContactsPage from './contacts'
 import SettingsPage from './settings'
 
 const sidebarItems = [
   { key: "campaigns", label: "Campaigns" },
-  { key: "contacts", label: "Contacts" },
   { key: "settings", label: "Settings" }
 ]
 
@@ -23,8 +21,6 @@ export default function AdminLayout({
 
   const renderContent = () => {
     switch (activeTab) {
-      case "contacts":
-        return <ContactsPage />
       case "settings":
         return <SettingsPage />
       default:
@@ -38,10 +34,10 @@ export default function AdminLayout({
       <div className="lg:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-sky-600 text-white font-bold text-xs">
+            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-8 sm:h-8 rounded-lg bg-sky-600 text-white font-bold text-sm sm:text-xs">
               A
             </div>
-            <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h1 className="text-xl sm:text-lg font-semibold text-gray-900 dark:text-white">
               Admin Portal
             </h1>
           </div>
@@ -71,7 +67,7 @@ export default function AdminLayout({
                       setActiveTab(item.key)
                       setIsMobileMenuOpen(false)
                     }}
-                    className={`w-full justify-start h-11 px-4 ${isActive ? '' : 'text-gray-700 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-300'}`}
+                    className={`w-full justify-start h-14 sm:h-11 px-4 text-base sm:text-sm ${isActive ? '' : 'text-gray-700 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-300'}`}
                   >
                     <div className={`w-2 h-2 rounded-full mr-3 ${
                       isActive ? 'bg-white' : 'bg-gray-400 dark:bg-gray-500'
@@ -82,7 +78,7 @@ export default function AdminLayout({
               })}
               <div className="pt-2 mt-2 border-t border-gray-200 dark:border-gray-700">
                 <Link href="/">
-                  <Button variant="neumorphic-white" className="w-full justify-start h-10 text-gray-600 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-400">
+                  <Button variant="neumorphic-white" className="w-full justify-start h-12 sm:h-10 text-base sm:text-sm text-gray-600 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-400">
                     <span>← Back to Join</span>
                   </Button>
                 </Link>
@@ -97,14 +93,14 @@ export default function AdminLayout({
         <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800">
           <div className="p-6">
             <div className="flex items-center space-x-3 mb-8">
-              <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-sky-600 text-white font-bold text-sm">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-10 sm:h-10 rounded-lg bg-sky-600 text-white font-bold text-base sm:text-sm">
                 A
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
+                <h1 className="text-xl sm:text-lg font-semibold text-gray-900 dark:text-white">
                   Admin Portal
                 </h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Management Dashboard</p>
+                <p className="text-sm sm:text-xs text-gray-500 dark:text-gray-400">Management Dashboard</p>
               </div>
             </div>
             
@@ -116,7 +112,7 @@ export default function AdminLayout({
                     key={item.key}
                     variant={isActive ? "neumorphic-primary" : "neumorphic-white"}
                     onClick={() => setActiveTab(item.key)}
-                    className={`w-full justify-start h-12 px-4 ${isActive ? '' : 'text-gray-700 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-300'}`}
+                    className={`w-full justify-start h-14 sm:h-12 px-4 text-base sm:text-sm ${isActive ? '' : 'text-gray-700 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-300'}`}
                     aria-current={isActive ? 'page' : undefined}
                   >
                     <div className={`w-2 h-2 rounded-full mr-4 ${
@@ -131,7 +127,7 @@ export default function AdminLayout({
           
           <div className="mt-auto p-6 border-t border-gray-200 dark:border-gray-800">
             <Link href="/">
-              <Button variant="neumorphic-white" className="w-full justify-start h-10 text-gray-600 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-400">
+              <Button variant="neumorphic-white" className="w-full justify-start h-12 sm:h-10 text-base sm:text-sm text-gray-600 bg-transparent border-0 shadow-none hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-400">
                 <span>← Back to Join</span>
               </Button>
             </Link>
@@ -140,7 +136,7 @@ export default function AdminLayout({
 
         {/* Main Content */}
         <div className="lg:pl-64 flex-1">
-          <main className="p-4 sm:p-6 lg:p-8 xl:p-12">
+          <main className="p-6 sm:p-4 lg:p-8 xl:p-12">
             <div className="max-w-6xl mx-auto">
               {renderContent()}
             </div>
